@@ -8,32 +8,45 @@ var time = 0;
 var level = 0;
 //             2,3,4,4.30
 // var times = [120, 180, 240, 270];
-// var times = [5, 10, 20, 25];
-var times = [20, 30, 40, 45];
+var times = [5, 10, 20, 25];
+// var times = [20, 30, 40, 45];
+// var times = [1, 2, 3, 4];
 var delay = 4500;
 var btnStart = e('btnStart');
 var btnStop = e('btnStop');
 var btnReset = e('btnReset');
+var blinkDiv = e('blink-div');
+blinkDiv.isHide = true;
 
 var bgDiv = e('bg-div');
 var timeDiv = e('time-div');
 timeDiv.hide = function() {
-    this.style.display = 'none';
+    // this.style.display = 'none';
 }
 timeDiv.show = function() {
-    this.style.display = 'flex';
+    // this.style.display = 'flex';
 }
+
+function blink() {
+    blinkDiv.isHide = !blinkDiv.isHide;
+    if (blinkDiv.isHide)
+        blinkDiv.style.visibility = 'hidden';
+    else
+        blinkDiv.style.visibility = 'visible';
+}
+
 
 function stop() {
     clearInterval(window.timer);
-    timeDiv.show();
+    // timeDiv.show();
 }
+
 
 function reset() {
     time = 0;
     level = 0;
     timeDiv.innerText = 'TIMER';
-    timeDiv.show();
+    // timeDiv.show();
     clearTimeout(window.showtime);
     clearInterval(window.timer);
     bgDiv.style.backgroundColor =
@@ -42,6 +55,9 @@ function reset() {
     timeDiv.style.color =
         getComputedStyle(document.documentElement)
         .getPropertyValue('--txt-clr-' + level);
+
+    blinkDiv.isHide = true;
+    blinkDiv.style.visibility = 'hidden';
 }
 
 function start() {
@@ -50,18 +66,22 @@ function start() {
     if (time >= times[times.length - 1]) reset();
 
     if (time == 0) {
-        timeDiv.innerText = '0 : 0';
+        // timeDiv.innerText = '0 : 0';
+        timeDiv.innerText = '';
     }
 
-    clearTimeout(window.showtime);
-    timeDiv.show();
-    window.showtime = setTimeout(() => {
-        timeDiv.hide();
-    }, delay);
+    // clearTimeout(window.showtime);
+    // timeDiv.show();
+    // window.showtime = setTimeout(() => {
+    //     timeDiv.hide();
+    // }, delay);
+
+    blink();
 
     window.timer = setInterval(() => {
         time++;
-        timeDiv.innerText = `${parseInt(time/60)} : ${time%60}`;
+        // timeDiv.innerText = `${parseInt(time/60)} : ${time%60}`;
+        blink();
         var i;
         for (i = 0; i < times.length; i++) {
             if (time < times[i]) {
@@ -74,18 +94,19 @@ function start() {
                         getComputedStyle(document.documentElement)
                         .getPropertyValue('--txt-clr-' + level);
 
-                    clearTimeout(window.showtime);
-                    timeDiv.show();
-                    window.showtime = setTimeout(() => {
-                        timeDiv.hide();
-                    }, delay);
+                    // clearTimeout(window.showtime);
+                    // timeDiv.show();
+                    // window.showtime = setTimeout(() => {
+                    //     timeDiv.hide();
+                    // }, delay);
 
                     console.log('CH', level, times[level]);
                 }
                 break;
             } else if (i == times.length - 1) {
-                timeDiv.show();
+                // timeDiv.show();
                 timeDiv.innerText = "Time's up"
+                clearInterval(window.timer);
             }
         }
 
