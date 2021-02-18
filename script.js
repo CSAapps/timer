@@ -7,8 +7,8 @@ function e(id) {
 var time = 0;
 var level = 0;
 //             2,3,4,4.30
-// var times = [120, 180, 240, 270];
-var times = [5, 10, 20, 25];
+var times = [120, 180, 240, 270];
+// var times = [5, 10, 20, 25];
 // var times = [20, 30, 40, 45];
 // var times = [1, 2, 3, 4];
 var delay = 4500;
