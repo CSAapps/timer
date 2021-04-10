@@ -37,7 +37,7 @@ function save() {
     if (!obj.name)
         obj.name = prompt("Enter a name");
     obj.time = time;
-    storage[getKey()] = obj;
+    storage.push(obj);
     localStorage.report = JSON.stringify(storage);
 }
 
@@ -134,4 +134,4 @@ btnReset.onclick = reset;
 txtName.onclick = function() { this.select(); }
 
 if (!localStorage.report)
-    localStorage.report = JSON.stringify({});
+    localStorage.report = JSON.stringify([]);
