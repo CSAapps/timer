@@ -1,7 +1,5 @@
 function e(id) {
-    var elm = document.getElementById(id);
-
-    return elm;
+    return document.getElementById(id);
 }
 
 var time = 0;
@@ -16,6 +14,7 @@ var btnStart = e('btnStart');
 var btnStop = e('btnStop');
 var btnReset = e('btnReset');
 var blinkDiv = e('blink-div');
+var txtName = e('txt-name');
 blinkDiv.isHide = true;
 
 var bgDiv = e('bg-div');
@@ -25,6 +24,21 @@ timeDiv.hide = function() {
 }
 timeDiv.show = function() {
     // this.style.display = 'flex';
+}
+
+function getKey() {
+    return parseInt(Date.now() / 1000);
+}
+
+function save() {
+    var storage = JSON.parse(localStorage.report);
+    var obj = {};
+    obj.name = txtName.value;
+    if (!obj.name)
+        obj.name = prompt("Enter a name");
+    obj.time = time;
+    storage[getKey()] = obj;
+    localStorage.report = JSON.stringify(storage);
 }
 
 function blink() {
@@ -43,6 +57,7 @@ function stop() {
 
 
 function reset() {
+    save();
     time = 0;
     level = 0;
     timeDiv.innerText = 'TIMER';
@@ -116,3 +131,7 @@ function start() {
 btnStart.onclick = start;
 btnStop.onclick = stop;
 btnReset.onclick = reset;
+txtName.onclick = function() { this.select(); }
+
+if (!localStorage.report)
+    localStorage.report = JSON.stringify({});
