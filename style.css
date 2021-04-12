@@ -75,6 +75,12 @@ body {
     visibility: hidden;
 }
 
+.fix-btn {
+    position: fixed;
+    right: 10px;
+    top: 10px;
+}
+
 button {
     border: none;
     padding: 10px;
