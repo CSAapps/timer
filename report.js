@@ -11,7 +11,7 @@ function formatTime(time) {
 }
 var report = JSON.parse(localStorage.report);
 
-for (var i = 0; i < 10; i++) {
+for (var i = 0; i < 1; i++) {
     if (report.length) {
         report.forEach(e => {
             var row = `<tr><td>${e.name}</td><td>${formatTime(e.time)}</td></tr>`
