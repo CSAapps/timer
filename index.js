@@ -6,9 +6,9 @@ var time = 0;
 var level = 0;
 var introLevel = 0;
 // 1,1.30,2
-// var times = [60, 90, 120, 150];
+var times = [60, 90, 120, 150];
 var introTimes = ['1min', '1min 30s', '2min'];
-var times = [4, 6, 9, 12];
+// var times = [4, 6, 9, 12];
 
 var btnStart = e('btnStart');
 var btnStop = e('btnStop');
