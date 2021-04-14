@@ -75,7 +75,7 @@ body {
     visibility: hidden;
 }
 
-.fix-btn {
+.fix-div {
     position: fixed;
     right: 10px;
     top: 10px;

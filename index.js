@@ -4,13 +4,16 @@ function e(id) {
 
 var time = 0;
 var level = 0;
+var introLevel = 0;
 // 1,1.30,2
-var times = [60, 90, 120, 150];
-// var times = [4, 6, 9, 12];
+// var times = [60, 90, 120, 150];
+var introTimes = ['1min', '1min 30s', '2min'];
+var times = [4, 6, 9, 12];
 
 var btnStart = e('btnStart');
 var btnStop = e('btnStop');
 var btnReset = e('btnReset');
+var btnIntro = e('btnIntro');
 var blinkDiv = e('blink-div');
 var txtName = e('txt-name');
 blinkDiv.isHide = true;
@@ -77,15 +80,14 @@ function start() {
     window.timer = setInterval(() => {
         time++;
         blink();
-        var i;
-        for (i = 0; i < times.length; i++) {
+        for (var i = 0; i < times.length; i++) {
             if (time < times[i]) {
                 if (level != i) {
                     level = i;
                     bgDiv.style.backgroundColor =
                         getComputedStyle(document.documentElement)
                         .getPropertyValue('--bg-clr-' + level);
-                    timeDiv.style.color =
+                    txtName.style.color =
                         getComputedStyle(document.documentElement)
                         .getPropertyValue('--txt-clr-' + level);
 
@@ -98,9 +100,25 @@ function start() {
     }, 1000);
 }
 
+function intro() {
+    timeDiv.innerText = introTimes[introLevel];
+    introLevel++;
+    bgDiv.style.backgroundColor =
+        getComputedStyle(document.documentElement)
+        .getPropertyValue('--bg-clr-' + introLevel);
+    timeDiv.style.color =
+        getComputedStyle(document.documentElement)
+        .getPropertyValue('--txt-clr-' + introLevel);
+
+    if (introLevel >= introTimes.length)
+        introLevel = 0;
+
+}
+
 btnStart.onclick = start;
 btnStop.onclick = stop;
 btnReset.onclick = reset;
+btnIntro.onclick = intro;
 txtName.onclick = function() { this.select(); }
 
 if (!localStorage.report)
